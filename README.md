@@ -33,10 +33,52 @@ After Quick Discovery finished, the CI looked like this:
 - **RAM:** 65,536 MB
 - **CPU:** GenuineIntel, 3,200 MHz, 1 CPU, 24 cores
 - **Disk space:** 7,899.2 GB
+- **IP Address:** `192.168.2.32`
+- **FQDN:** `DESKTOP-081G9OH`
+- **Discovery source:** ServiceNow
+- **Most recent discovery:** 2026-11-02 22:52:52
 
-![Computer CI after Discovery](https://github.com/user-attachments/assets/PLACEHOLDER-computer-ci.png)
+### Classic form view
 
-*(Upload the Computer form screenshot and replace the URL.)*
+![Classic Computer form showing OS, manufacturer, serial, RAM, CPU, and disk](images/computer-ci-form.png)
+
+### CMDB Workspace — Summary
+
+![CMDB Workspace Summary for desktop-081g9oh showing operational status, discovery source, IP, serial, RAM, and CPU](images/cmdb-summary.png)
+
+### CMDB Workspace — Attributes (All)
+
+![CMDB Workspace Attributes tab showing disk space, manufacturer, model, OS, serial, and other fields](images/cmdb-attributes.png)
+
+### CMDB Workspace — File Systems
+
+Discovered drives on the desktop:
+
+| Drive | Available (MB) | Capacity (MB) | Mount |
+|---|---|---|---|
+| C | 402,183 | 1,906,311 | C:\ |
+| D | 425,427 | 457,844 | D:\ |
+| E | 509,865 | 1,906,310 | E:\ |
+| F | 397,351 | 1,907,600 | F:\ |
+| G | 523,076 | 1,907,728 | G:\ |
+
+![CMDB Workspace File Systems related list](images/cmdb-filesystems.png)
+
+### CMDB Workspace — Running Processes
+
+Discovery captured 332 running processes (sample shown below).
+
+![CMDB Workspace Running Processes list](images/cmdb-running-processes.png)
+
+### CMDB Workspace — Network Adapters
+
+- **Name:** Ethernet 3
+- **IP Address:** `192.168.2.32`
+- **Netmask:** `255.255.255.0`
+- **DHCP Enabled:** true
+- **MAC Address:** `74:19:F8:16:12:55`
+
+![CMDB Workspace Network Adapters](images/cmdb-network-adapters.png)
 
 ---
 
@@ -48,9 +90,9 @@ On the Discovery Status record you see three related lists:
 - **Devices** — CIs that were created or updated
 - **ECC Queue** — the actual probe traffic (input/output) between the instance and the MID
 
-![Devices related list](https://github.com/user-attachments/assets/PLACEHOLDER-devices.png)
+![Devices related list showing the discovered desktop](images/devices-tab.png)
 
-![ECC Queue](https://github.com/user-attachments/assets/PLACEHOLDER-ecc.png)
+![ECC Queue showing probes executed by the Windows MID](images/ecc-queue.png)
 
 The ECC Queue for this run shows `mid.server.win11-mid` executing:
 
@@ -68,7 +110,7 @@ The classification step that identified the machine as Windows used the **Window
 
 It reads a set of WMI paths and registry keys (ComputerSystem, Win32_OperatingSystem, etc.) to decide the class and OS.
 
-![Windows Classify WMI Probe](https://github.com/user-attachments/assets/PLACEHOLDER-wmi-classify.png)
+![Windows Classify WMI Probe definition and WMI fields](images/windows-classify-probe.png)
 
 ---
 
@@ -156,14 +198,15 @@ A Windows MID can run WMI probes. A Linux MID cannot. But even a Windows MID wil
 
 ---
 
-## Screenshots from this run
+## Screenshots
 
-- Devices related list showing `desktop-081g9oh`
-- Computer CI form with OS, RAM, CPU, disk
-- ECC Queue showing the probes executed by `mid.server.win11-mid`
-- Windows - Classify WMI Probe definition
+All screenshots referenced above live in the `images/` folder of this repository. To display them:
 
-*(Replace the PLACEHOLDER image URLs above with the screenshots you captured.)*
+1. Create an `images/` folder in the repo (if it does not exist).
+2. Upload the PNG files with the exact names used in the markdown above.
+3. Commit and push.
+
+Alternatively, drag the images into the README editor on GitHub and it will generate `user-attachments` URLs automatically.
 
 ---
 
