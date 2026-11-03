@@ -45,6 +45,18 @@ Key observations:
 
 ---
 
+## Clicking “To Check Pattern Log Press Here”
+
+From the Discovery Log (the list shown earlier), each pattern exploration line contains a link:
+
+> Exploring CI Pattern, Pattern name: **Linux Server**. To Check Pattern Log Press Here
+
+Clicking that link opens the **Horizontal Discovery Log** for the specific IP/host (in this case `192.168.2.52` / `gx10-c9b9`).
+
+This is the detailed step-by-step trace of what the pattern actually did on the MID Server.
+
+---
+
 ## Linux Horizontal Discovery (gx10-c9b9 / 192.168.2.52)
 
 When you click the “To Check Pattern Log Press Here” link on a Linux Server pattern entry, ServiceNow opens the **Horizontal Discovery Log** for that IP.
