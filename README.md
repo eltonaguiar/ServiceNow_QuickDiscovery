@@ -45,6 +45,49 @@ Key observations:
 
 ---
 
+## Linux Horizontal Discovery (gx10-c9b9 / 192.168.2.52)
+
+When you click the “To Check Pattern Log Press Here” link on a Linux Server pattern entry, ServiceNow opens the **Horizontal Discovery Log** for that IP.
+
+The log shows the pattern steps that ran on the Linux MID (`mid.server.gx10-mid`):
+
+- Pre Pattern Execution
+- Selecting Pattern for Execution
+- Pattern checks (UNIX Cluster, ORACLE Clusterware, etc.)
+- File Tracking, Target Cleanup
+- Creating CI / Creating Relations / Creating References
+- Payload Processing (including Delete Handler)
+
+Behind the scenes the MID executed:
+
+- **HorizontalDiscoveryProbe** — Pattern Launcher: Linux Server (input payload contains the compressed result XML)
+- **SSHCommand** — `bash ${file:pkg_munger}` (output from the instance telling the MID what to run over SSH)
+- **MultiProbe** — Unix - Application Dependency Mapping
+
+The resulting CI is a **Linux Server**:
+
+- **Name:** `gx10-c9b9`
+- **Manufacturer:** ASUSTeK COMPUTER INC.
+- **Serial:** `TAMSAG013604ANJ`
+- **OS:** Linux Ubuntu 24.04.5
+- **CPU:** ARM (20 cores)
+- **RAM:** 124,544 MB
+- **Disk:** 936.21 GB
+- **IP:** `192.168.2.52`
+- **Description:** Linux gx10-c9b9 … Ubuntu SMP … aarch64 GNU/Linux
+
+### DNS Names related list
+
+Under **Related Items → Owns::Owned by (parent) - DNS Names** you see multiple DNS Name records owned by this Linux Server.
+
+**What is happening:**
+
+During horizontal discovery the pattern collects DNS information from the host (via `/etc/hosts`, `hostname`, reverse lookups, or the DNS Names sensor). Each name it finds is created as a **DNS Name** CI (`cmdb_ci_dns_name`) and linked to the server with an **Owns / Owned by** relationship.
+
+In this case the host has several names (including Tailscale MagicDNS names ending in `.tail11125f.ts.net`). Discovery created a separate DNS Name record for each and attached them to `gx10-c9b9`. This is normal and useful — it lets you see every name that resolves to the same server without treating them as separate CIs.
+
+---
+
 ## Final asset data (Windows desktop)
 
 After Quick Discovery finished, the CI looked like this:
