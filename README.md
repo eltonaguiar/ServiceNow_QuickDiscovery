@@ -76,6 +76,9 @@ The resulting CI is a **Linux Server**:
 - **IP:** `192.168.2.52`
 - **Description:** Linux gx10-c9b9 … Ubuntu SMP … aarch64 GNU/Linux
 
+Direct link to the CI:  
+https://dev296154.service-now.com/now/nav/ui/classic/params/target/cmdb_ci_linux_server.do%3Fsys_id%3D9adeb4c459d053107b64ee18086f95a3
+
 ### DNS Names related list
 
 Under **Related Items → Owns::Owned by (parent) - DNS Names** you see multiple DNS Name records owned by this Linux Server.
@@ -85,6 +88,45 @@ Under **Related Items → Owns::Owned by (parent) - DNS Names** you see multiple
 During horizontal discovery the pattern collects DNS information from the host (via `/etc/hosts`, `hostname`, reverse lookups, or the DNS Names sensor). Each name it finds is created as a **DNS Name** CI (`cmdb_ci_dns_name`) and linked to the server with an **Owns / Owned by** relationship.
 
 In this case the host has several names (including Tailscale MagicDNS names ending in `.tail11125f.ts.net`). Discovery created a separate DNS Name record for each and attached them to `gx10-c9b9`. This is normal and useful — it lets you see every name that resolves to the same server without treating them as separate CIs.
+
+### Related lists on the Linux Server CI
+
+**Network Adapters (5)**
+
+| Name | IP Address | Netmask | Notes |
+|---|---|---|---|
+| docker0 | 172.17.0.1 | 255.255.0.0 | Docker bridge |
+| enP7s7 | 192.168.2.52 | 255.255.255.0 | Physical / main interface |
+| tailscale0 | 100.125.17.75 | 255.255.255.255 | Tailscale |
+| veth… | fe80::… | 64 | Virtual Ethernet (IPv6 link-local) |
+
+**Storage Devices (2)**
+
+| Name | Type | Interface | Size |
+|---|---|---|---|
+| /dev/nvme0 | Disk | NVMe | 931.5 GB |
+| /dev/nvme0n1 | Logical | NVMe | 931.5 GB |
+
+**File Systems (2)**
+
+| Name | Mount | Type | Size | Free |
+|---|---|---|---|---|
+| /dev/nvme0n1p1 | /boot/efi | VFAT | 511.0 MB | 503.6 MB |
+| /dev/nvme0n1p2 | / | Ext4 | 915.3 GB | 43.8 GB |
+
+**Software Installed** — 2,964 packages discovered (sample: 7zip, accountsservice, acl, adcli, adduser, etc.).
+
+**Running Processes** — 251 processes (sample includes cupsd notifier, a user process, dbus-daemon, etc.).
+
+**CI IPs** — Multiple IPv4 and IPv6 addresses attached to the various interfaces (docker0, enP7s7, tailscale0, veth…).
+
+**Memory Modules (1)**
+
+| Name | Capacity (MB) | Form Factor | Type |
+|---|---|---|---|
+| DIMM0 | 131,076 | Chip | Synchronous |
+
+These related lists are populated automatically by the Linux Server horizontal pattern and the associated probes (SSH commands, package inventory, process list, network interfaces, etc.).
 
 ---
 
