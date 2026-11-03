@@ -20,6 +20,31 @@ Quick Discovery targets a single known IP (or a small list). Full Discovery can 
 
 ---
 
+## Discovery Log (2026-11-02)
+
+Sample entries from the Discovery Log filtered to “Created on Today”:
+
+| Time | Level | Short Message | Device |
+|---|---|---|---|
+| 22:47:18 | Information | Discovery started | — |
+| 22:50:51 | Information | Discovery completed | — |
+| 22:48:04 | Warning | Other TCP connection states found: ["TIME_WAIT"] | 192.168.2.32 |
+| 22:47:41 | Information | Active, now Classifying | desktop-081g9oh |
+| 22:52:32 | Information | Exploring CI Pattern, Pattern name: **Windows OS - Desktops** | desktop-081g9oh |
+| 22:48:33 | Information | Exploring CI Pattern, Pattern name: **Linux Server** | gx10-c9b9 |
+| 22:52:52 | Information | Exploring CI Pattern, Pattern name: **Windows OS - Desktops** | desktop-081g9oh |
+| 22:47:30 | Information | Classified, now Identifying | 192.168.2.32 |
+| 22:48:40 | Information | Launching Pattern for CI type cmdb_ci_docker_engine, skipping creation of Shell CI | gx10-c9b9 |
+
+![Discovery Log from 2026-11-02 showing Windows OS - Desktops and Linux Server patterns](images/discovery-log-today.png)
+
+Key observations:
+- The Windows desktop (`desktop-081g9oh` / `192.168.2.32`) was classified via WMI and then explored with the **Windows OS - Desktops** pattern.
+- The Linux MID host (`gx10-c9b9` / `192.168.2.52`) triggered the **Linux Server** pattern.
+- A warning about TCP `TIME_WAIT` connections appeared during the scan of the Windows desktop (common and usually harmless).
+
+---
+
 ## Final asset data (Windows desktop)
 
 After Quick Discovery finished, the CI looked like this:
@@ -203,7 +228,7 @@ A Windows MID can run WMI probes. A Linux MID cannot. But even a Windows MID wil
 All screenshots referenced above live in the `images/` folder of this repository. To display them:
 
 1. Create an `images/` folder in the repo (if it does not exist).
-2. Upload the PNG files with the exact names used in the markdown above.
+2. Upload the PNG files with the exact names used in the markdown above (including `discovery-log-today.png`).
 3. Commit and push.
 
 Alternatively, drag the images into the README editor on GitHub and it will generate `user-attachments` URLs automatically.
