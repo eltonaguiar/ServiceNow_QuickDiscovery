@@ -9,6 +9,34 @@ Quick Discovery targets a single known IP (or a small list). Full Discovery can 
 
 ---
 
+## Table of Contents
+
+- [What we ran](#what-we-ran)
+- [Discovery Log (2026-11-02)](#discovery-log-2026-11-02)
+- [Clicking “To Check Pattern Log Press Here”](#clicking-to-check-pattern-log-press-here)
+- [Linux Horizontal Discovery](#linux-horizontal-discovery-gx10-c9b9--192168252)
+  - [DNS Names related list](#dns-names-related-list)
+  - [Related lists on the Linux Server CI](#related-lists-on-the-linux-server-ci)
+- [Final asset data (Windows desktop)](#final-asset-data-windows-desktop)
+  - [Classic form view](#classic-form-view)
+  - [CMDB Workspace — Summary](#cmdb-workspace--summary)
+  - [CMDB Workspace — Attributes](#cmdb-workspace--attributes-all)
+  - [CMDB Workspace — File Systems](#cmdb-workspace--file-systems)
+  - [CMDB Workspace — Running Processes](#cmdb-workspace--running-processes)
+  - [CMDB Workspace — Network Adapters](#cmdb-workspace--network-adapters)
+- [Discovery Status, Devices, and ECC Queue](#discovery-status-devices-and-ecc-queue)
+- [Windows Classify probe](#windows-classify-probe)
+- [MID Server capabilities — Windows vs Linux vs Mac](#mid-server-capabilities--windows-vs-linux-vs-mac)
+- [Can you discover many machines without Quick Discovery one-by-one?](#can-you-discover-many-machines-without-quick-discovery-one-by-one)
+- [What can be discovered without being “on” the device?](#what-can-be-discovered-without-being-on-the-device)
+- [Reporting on Discovery per MID Server](#reporting-on-discovery-per-mid-server)
+- [What determines which pattern / probe runs?](#what-determines-which-pattern--probe-runs)
+- [Screenshots](#screenshots)
+- [Related](#related)
+
+---
+
+
 ## What we ran
 
 | MID Server | Host | What it can normally discover | What we actually ran |
