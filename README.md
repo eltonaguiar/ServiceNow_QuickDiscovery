@@ -281,27 +281,50 @@ It reads a set of WMI paths and registry keys (ComputerSystem, Win32_OperatingSy
 
 ## Can you discover many machines without Quick Discovery one-by-one?
 
-**Yes.** Quick Discovery is intentionally limited to known IPs. For a subnet (or a list of 10 laptops) you use a **Discovery Schedule** with an IP range or a list of IPs.
+**Yes.** Quick Discovery is intentionally limited to known IPs. For a whole subnet (or a long list of devices) you use a **Discovery Schedule** with an IP range.
 
-**How:**
+### Example home/lab network
+
+Imagine a typical setup behind a Bell modem and an ASUS router:
+
+| Device | Type | Typical OS / role | What Discovery can usually see |
+|---|---|---|---|
+| Bell modem | Network device | Proprietary / embedded | Often only via SNMP if enabled; otherwise just an IP with open ports |
+| ASUS router | Network device | Proprietary (Linux-based) | SNMP or basic port scan; rarely a full CI without credentials |
+| Windows gaming laptop | Computer | Windows 11 | Full CI if WMI credentials work (OS, hardware, software, processes) |
+| Chromebook | Computer | ChromeOS / Linux | Limited — usually port scan only unless SSH is enabled |
+| MacBook | Computer | macOS | Possible with SSH credentials; no native WMI-style probe |
+| Linux desktop / server | Computer | Ubuntu / etc. | Full CI with SSH credentials |
+| iPad | Mobile | iOS | Port scan / basic identification only; no deep inventory |
+| Amazon Fire tablet | Mobile | Fire OS (Android) | Port scan only |
+| Meta Quest | VR headset | Android-based | Port scan only |
+| Smart TV | Consumer device | Proprietary | Port scan or SNMP if available; limited CI |
+| Phone (iOS / Android) | Mobile | iOS / Android | Port scan only |
+
+**How you would scan this subnet**
 
 1. Go to **Discovery → Discovery Schedules → New**
 2. Set the MID Server (or leave blank to let the system choose)
-3. Under **IP Ranges** (or **Discover**), add something like:
-   - `192.168.2.0/24` (entire subnet)
-   - or a comma-separated list: `192.168.2.32,192.168.2.45,...`
-4. Choose the schedule type (e.g. **Configuration Item** or **IP Range**)
-5. Activate and either wait for the schedule or click **Discover now**
+3. Under **IP Ranges**, add something like `192.168.2.0/24` (or a list of known IPs)
+4. Activate the schedule and click **Discover now** (or wait for it to run)
 
-**What the result looks like:**
+**What the result looks like**
+
 - One Discovery Status record
 - Multiple rows in the **Devices** related list (one per responsive host)
 - ECC Queue entries for every probe that ran against each IP
-- CIs created/updated in the CMDB for each machine that responded and could be classified
+- Rich CIs only for devices that responded to WMI (Windows) or SSH (Linux/Mac) with valid credentials
+- Everything else appears as a basic IP or network device (or nothing if it is firewalled / powered off)
 
-You do **not** need to run Quick Discovery 10 separate times.
+You do **not** need to run Quick Discovery once per device.
 
----
+### Practical notes for a mixed home network
+
+- **Windows MID** is the most useful here because it can do WMI for the gaming laptop and SSH for the Linux box and (with credentials) the Mac.
+- A **Linux MID** can handle the Linux machines and anything that speaks SSH, but it cannot run WMI probes.
+- Most consumer devices (TV, iPad, Fire tablet, Quest, phones) will only show up as IPs with open ports unless they expose SNMP or you have a custom pattern.
+- The Bell modem and ASUS router are usually discovered as network devices if SNMP is turned on; otherwise they are just IPs.
+
 
 ## What can be discovered without being “on” the device?
 
